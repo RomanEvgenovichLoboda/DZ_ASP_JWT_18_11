@@ -5,7 +5,7 @@
 namespace DZASPJWT1811.Migrations
 {
     /// <inheritdoc />
-    public partial class First : Migration
+    public partial class smart1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
