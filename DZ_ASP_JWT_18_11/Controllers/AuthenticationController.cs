@@ -18,7 +18,7 @@ namespace DZ_ASP_JWT_18_11.Controllers
             {
                 return BadRequest("Invalid user request!!!");
             }
-            if (user.UserName == "Jaydeep" && user.Password == "Pass@777")
+            if (user.UserName == "roman" && user.Password == "loboda")
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Secret"]));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);

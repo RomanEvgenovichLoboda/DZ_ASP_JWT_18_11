@@ -2,6 +2,7 @@
 using DZ_ASP_JWT_18_11.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DZ_ASP_JWT_18_11.Controllers
 {
@@ -20,7 +21,7 @@ namespace DZ_ASP_JWT_18_11.Controllers
         [HttpGet]
         [Route("GetProductById")]
         public async Task<ActionResult<Product>> GetProduct(int _id) => await _context.Products.FirstOrDefaultAsync((e)=>e.ProductId==_id);
-        [HttpPost]
+        [HttpPost,Authorize]
         [Route("AddProduct")]
         public async Task<IActionResult> Add([FromForm]Product product)
         {
@@ -28,7 +29,7 @@ namespace DZ_ASP_JWT_18_11.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("RemoveProductById")]
         public async Task<IActionResult> Remove(int id)
         {
