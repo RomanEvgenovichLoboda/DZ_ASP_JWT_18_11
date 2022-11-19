@@ -6,114 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="script1.js"></script>
+    <script src="script2.js"></script>
     <title>Products</title>
 </head>
-<body class="bg-black position-relative d-inline-flex flex-nowrap w-100">
-    <div class="card text-bg-dark p-3 d-inline-flex w-25 " style="min-width: 18rem;">
-        <div class="card-header"><h4>Admin Form</h4></div>
-        <div class="card-body">
-            <input type="text" class=" form-control log" placeholder="Enter Login" aria-label="Enter Login" aria-describedby="basic-addon1">
-            <input type="password" class=" form-control mt-2 pass" placeholder="Enter Password" aria-label="Enter Password" aria-describedby="basic-addon1">
-            <div class="mt-2">
-                <button type="button" class="btn btn-warning  bt2">Authorization</button>
+<body class="bg-black position-relative d-inline-flex flex-nowrap w-100 aut">
+
+    <div class="w-25" style="min-width: 18rem;">
+        <div class="login">
+            <div class="card text-bg-dark p-3 d-inline-flex w-100 ">
+                <div class="card-header"><h4>Admin Form</h4></div>
+                <div class="card-body">
+                    <input type="text" class=" form-control" id="lg" placeholder="Enter Login" aria-label="Enter Login" aria-describedby="basic-addon1">
+                    <input type="password" class=" form-control mt-2" id="ps" placeholder="Enter Password" aria-label="Enter Password" aria-describedby="basic-addon1">
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-warning bt1">Authorization</button>
+                    </div>
+                </div>
             </div>
         </div>
+        
+
+        <div class="admin" style=" display:none;">
+            <!--style=" display:none;">-->
+            <div class="card text-bg-dark p-3 d-inline-flex w-100" style="min-width: 18rem" ;>
+                <div class="card-header"><h4>Post Product</h4></div>
+                <div class="card-body">
+                    <input type="text" class=" form-control nm" placeholder="Product Name" aria-label="ProductName" aria-describedby="basic-addon1">
+                    <input type="text" class=" form-control mt-2 dsn" placeholder="Product Description" aria-label="Product Description" aria-describedby="basic-addon1">
+                    <input type="number" class=" form-control mt-2 cst" placeholder="Product Cost" aria-label="Product Cost" aria-describedby="basic-addon1">
+                    <input type="number" class=" form-control mt-2 stk" placeholder="Product Stock" aria-label="Product Stock" aria-describedby="basic-addon1">
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-warning  bt2">Add Product</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-bg-dark p-3 d-inline-flex w-100" style="min-width: 18rem" ;>
+                <div class="card-header"><h4>Delete Product</h4></div>
+                <div class="card-body">
+                     <input type="number" class=" form-control delId" placeholder="Product Id" aria-label="Product Id" aria-describedby="basic-addon1">
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-warning  bt3">Delete Product</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
     <div class="card text-bg-dark p-3 d-inline-flex w-75" style="max-width: 75rem;">
         <div class="card-header"><h4>Products :</h4></div>
         <div class="card-body">
             <div class=" mt-3  d-flex flex-wrap  cont"></div>
         </div>
     </div>
-
-
-
-
-
-
-
-    <!--<div  id="userInfo" style="display:none;">
-        <div class="card text-bg-dark p-3" style="max-width: 18rem;">
-            <p>Добро пожаловать <span id="userName"></span>!</p>
-            <input type="button" class="btn btn-warning mt-3" value="Выйти" id="logOut" />
-        </div>
-
-    </div>
-    <div class="card text-bg-dark p-3" style="max-width: 18rem;" id="loginForm">
-        <h3>Вход на сайт</h3>
-        <p>
-            <input type="email" class="form-control log" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" id="email" />
-        </p>
-        <p>
-            <input type="password" class="form-control log" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" id="password" />
-        </p>
-        <input type="submit" class="btn btn-warning" id="submitLogin" value="Логин" />
-        <p>
-            <input type="submit" class="btn btn-warning mt-3" id="getData" value="Получить данные" />
-        </p>
-    </div>
-
-    <script>
-        var tokenKey = "accessToken";
-        // при нажатии на кнопку отправки формы идет запрос к /login для получения токена
-        document.getElementById("submitLogin").addEventListener("click", async e => {
-            e.preventDefault();
-            // отправляет запрос и получаем ответ
-            const response = await fetch("/login", {
-                method: "POST",
-                headers: { "Accept": "application/json", "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    email: document.getElementById("email").value,
-                    password: document.getElementById("password").value
-                })
-            });
-            // если запрос прошел нормально
-            if (response.ok === true) {
-                // получаем данные
-                const data = await response.json();
-                // изменяем содержимое и видимость блоков на странице
-                document.getElementById("userName").innerText = data.username;
-                document.getElementById("userInfo").style.display = "block";
-                document.getElementById("loginForm").style.display = "none";
-                // сохраняем в хранилище sessionStorage токен доступа
-                sessionStorage.setItem(tokenKey, data.access_token);
-            }
-            else  // если произошла ошибка, получаем код статуса
-                console.log("Status: ", response.status);
-        });
-
-        // кнопка для обращения по пути "/data" для получения данных
-        document.getElementById("getData").addEventListener("click", async e => {
-            e.preventDefault();
-            // получаем токен из sessionStorage
-            const token = sessionStorage.getItem(tokenKey);
-            // отправляем запрос к "/data
-            const response = await fetch("/data", {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": "Bearer " + token  // передача токена в заголовке
-                }
-            });
-
-            if (response.ok === true) {
-                const data = await response.json();
-                alert(data.message);
-            }
-            else
-                console.log("Status: ", response.status);
-        });
-
-        // условный выход - просто удаляем токен и меняем видимость блоков
-        document.getElementById("logOut").addEventListener("click", e => {
-
-            e.preventDefault();
-            document.getElementById("userName").innerText = "";
-            document.getElementById("userInfo").style.display = "none";
-            document.getElementById("loginForm").style.display = "block";
-            sessionStorage.removeItem(tokenKey);
-        });
-    </script>-->
 </body>
 </html>
